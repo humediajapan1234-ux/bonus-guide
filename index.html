@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>事務所収益表（70%）</title>
+<title>事務所収益表</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #f5f5f3; color: #1a1a1a; }
@@ -69,7 +69,7 @@ h1 { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.25rem; 
 </head>
 <body>
 <div class="wrap">
-<h1>事務所収益表（70%）</h1>
+<h1>事務所収益表</h1>
 <p class="subtitle">TikTokライブ配信 報酬制度ガイド — HUMEDIA japan.</p>
 
 <div class="nav-tabs">
@@ -478,95 +478,95 @@ h1 { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.25rem; 
 
 <div id="calc" class="page">
 
-<div style="border-top:1.5px dashed #ccc;padding-top:1.25rem;margin-top:0.5rem;">
-    <!-- ライバー別 70% -->
-    <div class="section-title" style="border-color:#185FA5;">① ライバー別報酬（70%）</div>
-    <div id="liver-rows-70"></div>
-    <button onclick="addLiverRow70()"
-      style="width:100%;padding:9px;font-size:13px;font-weight:500;border:0.5px dashed #aac8f0;border-radius:8px;background:#f0f5fb;color:#185FA5;cursor:pointer;margin-bottom:0.75rem;">
-      ＋ ライバーを追加
+  <!-- ① ライバー別報酬 -->
+  <div class="section-title">① ライバー別報酬（ランクアップ ＋ アクティブ）</div>
+  <div style="font-size:11px;color:#888;margin-bottom:8px;">配信日数・時間・ダイヤを入力するとアクティブLvが自動判定されます</div>
+  <div id="liver-rows"></div>
+  <button onclick="addLiverRow()"
+    style="width:100%;padding:9px;font-size:13px;font-weight:500;border:0.5px dashed #aac8f0;border-radius:8px;background:#f0f5fb;color:#185FA5;cursor:pointer;margin-bottom:0.75rem;">
+    ＋ ライバーを追加
+  </button>
+  <div style="display:flex;gap:8px;margin-bottom:1rem;">
+    <button onclick="calcAll()"
+      style="flex:1;padding:11px;font-size:14px;font-weight:600;border:none;border-radius:10px;background:#185FA5;color:#fff;cursor:pointer;">
+      計算する
     </button>
-    <div style="display:flex;gap:8px;margin-bottom:1rem;">
-      <button onclick="calcAll70()"
-        style="flex:1;padding:11px;font-size:14px;font-weight:600;border:none;border-radius:10px;background:#185FA5;color:#fff;cursor:pointer;">
-        計算する（70%）
-      </button>
-      <button onclick="clearAll70()"
-        style="padding:11px 16px;font-size:13px;border:0.5px solid #ccc;border-radius:10px;background:#fff;color:#666;cursor:pointer;">
-        クリア
-      </button>
-    </div>
-    <div id="multi-result-70" style="display:none;">
-      <div class="section-title" style="border-color:#185FA5;">③ ライバー別内訳（70%）</div>
-      <div id="multi-cards-70"></div>
-    </div>
-
-    <!-- レベニューボーナス 70% -->
-    <div class="section-title" style="border-color:#185FA5;">② レベニューボーナス（70%）</div>
-    <div style="background:#fff;border:0.5px solid #aac8f0;border-radius:12px;padding:0.875rem;margin-bottom:0.75rem;">
-      <div style="margin-bottom:10px;">
-        <div style="font-size:11px;color:#888;margin-bottom:5px;">会社全体の獲得ダイヤ数</div>
-        <div class="km-wrap">
-          <input id="rev-bonus-diamond-70" type="text" placeholder="例: 10M"
-            style="padding:9px 10px;font-size:14px;border:0.5px solid #aac8f0;border-radius:8px;background:#fafafa;outline:none;"
-            oninput="calcRevBonus70()">
-          <button class="km-btn" onclick="appendKM('rev-bonus-diamond-70','K',calcRevBonus70)">K</button>
-          <button class="km-btn" onclick="appendKM('rev-bonus-diamond-70','M',calcRevBonus70)">M</button>
-        </div>
-      </div>
-      <div style="margin-bottom:10px;">
-        <div style="font-size:11px;color:#888;margin-bottom:6px;">ボーナス率を選択</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:5px;">
-          <button id="rrate70-btn-2"  onclick="selectRevRate70(2)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#E6F1FB;color:#185FA5;cursor:pointer;">2%<br><span style="font-size:9px;font-weight:400;">Lv1</span></button>
-          <button id="rrate70-btn-3"  onclick="selectRevRate70(3)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">3%<br><span style="font-size:9px;font-weight:400;">Lv2</span></button>
-          <button id="rrate70-btn-6"  onclick="selectRevRate70(6)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">6%<br><span style="font-size:9px;font-weight:400;">Lv3</span></button>
-          <button id="rrate70-btn-8"  onclick="selectRevRate70(8)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">8%<br><span style="font-size:9px;font-weight:400;">Lv4</span></button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
-          <button id="rrate70-btn-10" onclick="selectRevRate70(10)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">10%<br><span style="font-size:9px;font-weight:400;">Lv5</span></button>
-          <button id="rrate70-btn-12" onclick="selectRevRate70(12)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">12%<br><span style="font-size:9px;font-weight:400;">Lv6</span></button>
-          <button id="rrate70-btn-15" onclick="selectRevRate70(15)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">15%<br><span style="font-size:9px;font-weight:400;">Lv7</span></button>
-        </div>
-      </div>
-      <div id="rev-bonus-result-70" style="display:none;background:#f0f5fb;border-radius:8px;padding:10px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid #c5d9ee;">
-          <span style="font-size:12px;color:#666;">獲得ダイヤ</span>
-          <span id="rev-bonus-disp-70" style="font-size:13px;font-weight:600;color:#1a1a1a;"></span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid #c5d9ee;">
-          <span style="font-size:12px;color:#666;">適用ボーナス率</span>
-          <span id="rev-bonus-rate-disp-70" style="font-size:13px;font-weight:600;color:#185FA5;"></span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0 3px;">
-          <span style="font-size:12px;color:#185FA5;font-weight:600;">レベニューボーナス（70%）</span>
-          <span id="rev-bonus-jpy-70" style="font-size:18px;font-weight:700;color:#185FA5;"></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 総報酬額 70% -->
-    <div class="section-title" style="border-color:#185FA5;">総報酬額（70%）</div>
-    <div style="background:#E6F1FB;border-radius:12px;padding:1rem;margin-bottom:1rem;">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid #aac8f0;">
-        <span style="font-size:12px;color:#185FA5;">事務所収益合計（ライバー計）</span>
-        <span id="total-active-70" style="font-size:15px;font-weight:600;color:#185FA5;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid #aac8f0;">
-        <span style="font-size:12px;color:#185FA5;">レベニューボーナス</span>
-        <span id="total-revenue-70" style="font-size:15px;font-weight:600;color:#185FA5;">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;">
-        <span style="font-size:14px;font-weight:700;color:#185FA5;">総報酬額（70%）</span>
-        <span id="total-jpy-70" style="font-size:28px;font-weight:700;color:#185FA5;">—</span>
-      </div>
-    </div>
-    <button onclick="updateGrandTotal70()"
-      style="width:100%;padding:11px;font-size:14px;font-weight:600;border:none;border-radius:10px;background:#185FA5;color:#fff;cursor:pointer;margin-bottom:1rem;">
-      総報酬額を更新（70%）
+    <button onclick="clearAll()"
+      style="padding:11px 16px;font-size:13px;border:0.5px solid #ccc;border-radius:10px;background:#fff;color:#666;cursor:pointer;">
+      クリア
     </button>
-  
+  </div>
 
-</div>
+  <!-- ② レベニューボーナス -->
+  <div class="section-title">② レベニューボーナス</div>
+  <div style="background:#fff;border:0.5px solid #aac8f0;border-radius:12px;padding:0.875rem;margin-bottom:0.75rem;">
+    <div style="margin-bottom:10px;">
+      <div style="font-size:11px;color:#888;margin-bottom:5px;">会社全体の獲得ダイヤ数</div>
+      <div class="km-wrap">
+        <input id="rev-bonus-diamond" type="text" placeholder="例: 10M"
+          style="padding:9px 10px;font-size:14px;border:0.5px solid #aac8f0;border-radius:8px;background:#fafafa;outline:none;"
+          oninput="calcRevBonus()">
+        <button class="km-btn" onclick="appendKM('rev-bonus-diamond','K',calcRevBonus)">K</button>
+        <button class="km-btn" onclick="appendKM('rev-bonus-diamond','M',calcRevBonus)">M</button>
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <div style="font-size:11px;color:#888;margin-bottom:6px;">ボーナス率を選択</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:5px;">
+        <button id="rrate-btn-2"  onclick="selectRevRate(2)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#E6F1FB;color:#185FA5;cursor:pointer;">2%<br><span style="font-size:9px;font-weight:400;">Lv1</span></button>
+        <button id="rrate-btn-3"  onclick="selectRevRate(3)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">3%<br><span style="font-size:9px;font-weight:400;">Lv2</span></button>
+        <button id="rrate-btn-6"  onclick="selectRevRate(6)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">6%<br><span style="font-size:9px;font-weight:400;">Lv3</span></button>
+        <button id="rrate-btn-8"  onclick="selectRevRate(8)"  style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">8%<br><span style="font-size:9px;font-weight:400;">Lv4</span></button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
+        <button id="rrate-btn-10" onclick="selectRevRate(10)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">10%<br><span style="font-size:9px;font-weight:400;">Lv5</span></button>
+        <button id="rrate-btn-12" onclick="selectRevRate(12)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">12%<br><span style="font-size:9px;font-weight:400;">Lv6</span></button>
+        <button id="rrate-btn-15" onclick="selectRevRate(15)" style="padding:7px 4px;font-size:12px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#f0ede8;color:#666;cursor:pointer;">15%<br><span style="font-size:9px;font-weight:400;">Lv7</span></button>
+      </div>
+    </div>
+    <div id="rev-bonus-result" style="display:none;background:#f0f5fb;border-radius:8px;padding:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid #c5d9ee;">
+        <span style="font-size:12px;color:#666;">獲得ダイヤ</span>
+        <span id="rev-bonus-disp" style="font-size:13px;font-weight:600;color:#1a1a1a;"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid #c5d9ee;">
+        <span style="font-size:12px;color:#666;">適用ボーナス率</span>
+        <span id="rev-bonus-rate-disp" style="font-size:13px;font-weight:600;color:#185FA5;"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0 3px;">
+        <span style="font-size:12px;color:#185FA5;font-weight:600;">レベニューボーナス</span>
+        <span id="rev-bonus-jpy" style="font-size:18px;font-weight:700;color:#185FA5;"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 結果 -->
+  <div id="multi-result" style="display:none;">
+    <div class="section-title">③ ライバー別内訳</div>
+    <div id="multi-cards"></div>
+  </div>
+
+  <!-- 総報酬額 -->
+  <div class="section-title">総報酬額</div>
+  <div style="background:#E6F1FB;border-radius:12px;padding:1rem;margin-bottom:1rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid #aac8f0;">
+      <span style="font-size:12px;color:#185FA5;">事務所収益合計（ライバー計）</span>
+      <span id="total-active" style="font-size:15px;font-weight:600;color:#185FA5;">—</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid #aac8f0;">
+      <span style="font-size:12px;color:#185FA5;">レベニューボーナス</span>
+      <span id="total-revenue" style="font-size:15px;font-weight:600;color:#185FA5;">—</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;">
+      <span style="font-size:14px;font-weight:700;color:#185FA5;">総報酬額</span>
+      <span id="total-jpy" style="font-size:28px;font-weight:700;color:#185FA5;">—</span>
+    </div>
+  </div>
+  <button onclick="updateGrandTotal()"
+    style="width:100%;padding:11px;font-size:14px;font-weight:600;border:none;border-radius:10px;background:#185FA5;color:#fff;cursor:pointer;margin-bottom:1.5rem;">
+    総報酬額を更新
+  </button>
+
 </div>
 
 <script>
@@ -824,7 +824,7 @@ function previewRankup(id) {
   // totalRate: maintPct/upPctは表示用%文字列 → /100して通常%→さらに×0.0001でダイヤ→ドルスケールに
   // ランクアップ報酬: ダイヤ × rate（正しいスケール） × FX × 60%
   var totalRate = bonus.maintRate + (bonus.isRankup ? bonus.upRate : 0);
-  var jpyPreview = curr ? Math.round(curr * totalRate * FX * 0.6) : 0;
+  var jpyPreview = curr ? Math.round(curr * totalRate * FX * 0.7) : 0;
   var jpyHtml = curr ? (
     bonus.belowThreshold
     ? '<div style="margin-top:5px;background:#FAECE7;border-radius:7px;padding:5px 10px;font-size:11px;color:#993C1D;">⚠ 基準ダイヤ未達 — ボーナス 0%</div>'
@@ -884,9 +884,9 @@ function selectRevRate(pct) {
     var btn = document.getElementById('rrate-btn-' + r);
     if (!btn) return;
     if (r === pct) {
-      btn.style.background = '#E1F5EE';
-      btn.style.color      = '#085041';
-      btn.style.border     = '0.5px solid #9FE1CB';
+      btn.style.background = '#E6F1FB';
+      btn.style.color      = '#185FA5';
+      btn.style.border     = '0.5px solid #aac8f0';
     } else {
       btn.style.background = '#f0ede8';
       btn.style.color      = '#666';
@@ -1185,230 +1185,6 @@ addLiverRow();
 renderRevExamples();
 // ===== 報酬計算タブ =====
 let calcRevTotalAgencyJpy = 0;
-
-// ===== 70% バージョン =====
-var selectedRevRatePct70 = 2;
-var liverCount70 = 0;
-
-function selectRevRate70(pct) {
-  selectedRevRatePct70 = pct;
-  [2,3,6,8,10,12,15].forEach(function(r) {
-    var btn = document.getElementById('rrate70-btn-' + r);
-    if (!btn) return;
-    if (r === pct) {
-      btn.style.background = '#E6F1FB';
-      btn.style.color      = '#185FA5';
-      btn.style.border     = '0.5px solid #aac8f0';
-    } else {
-      btn.style.background = '#f0ede8';
-      btn.style.color      = '#666';
-      btn.style.border     = '0.5px solid #ccc';
-    }
-  });
-  calcRevBonus70();
-}
-
-function calcRevBonus70() {
-  var diamonds = parseD(document.getElementById('rev-bonus-diamond-70').value);
-  var resEl    = document.getElementById('rev-bonus-result-70');
-  if (!diamonds || diamonds <= 0) { resEl.style.display = 'none'; return; }
-  var rate     = selectedRevRatePct70 / 100;
-  var bonusUsd = diamonds * rate / 100;
-  var bonusJpy = bonusUsd * FX / 2 * 0.7;
-  resEl.style.display = 'block';
-  document.getElementById('rev-bonus-disp-70').textContent      = fmtD(diamonds) + ' ダイヤ';
-  document.getElementById('rev-bonus-rate-disp-70').textContent = selectedRevRatePct70 + '%';
-  document.getElementById('rev-bonus-jpy-70').textContent       = '¥' + Math.round(bonusJpy).toLocaleString();
-  updateGrandTotal70();
-}
-
-function addLiverRow70() {
-  liverCount70++;
-  var id = 's' + liverCount70;
-  var div = document.createElement('div');
-  div.id = 'liver-row-70-' + id;
-  div.style.cssText = 'background:#fff;border:0.5px solid #aac8f0;border-radius:10px;padding:0.75rem;margin-bottom:0.5rem;';
-
-  var btnId = id; // クロージャ用
-  div.innerHTML = [
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">',
-      '<span style="font-size:11px;font-weight:600;color:#185FA5;">ライバー ' + liverCount70 + '</span>',
-      '<button onclick="removeLiverRow70(\'' + id + '\')" style="width:26px;height:26px;font-size:13px;border:none;border-radius:6px;background:#f0ede8;color:#bbb;cursor:pointer;line-height:1;">✕</button>',
-    '</div>',
-    '<div style="display:flex;gap:6px;margin-bottom:8px;">',
-      '<input type="text" placeholder="ライバー名" id="lname70-' + id + '" style="flex:1;min-width:0;padding:8px 10px;font-size:13px;border:0.5px solid #aac8f0;border-radius:8px;background:#fafafa;outline:none;">',
-      '<input type="text" placeholder="@TikTok ID" id="lid70-' + id + '" style="flex:1;min-width:0;padding:8px 10px;font-size:12px;border:0.5px solid #aac8f0;border-radius:8px;background:#fafafa;outline:none;color:#185FA5;">',
-    '</div>',
-    '<div style="background:#f0f5fb;border-radius:8px;padding:8px 10px;margin-bottom:6px;">',
-      '<div style="font-size:10px;font-weight:600;color:#185FA5;margin-bottom:6px;">ランクアップ（70%）</div>',
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px;">',
-        '<div>',
-          '<div style="font-size:10px;color:#555;margin-bottom:3px;">前月ダイヤ数</div>',
-          '<div class="km-wrap">',
-            '<input type="text" placeholder="例: 200K" id="lprev70-' + id + '" style="padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-            '<button class="km-btn" onclick="appendKM(\'lprev70-' + id + '\',\'K\',null)">K</button>',
-            '<button class="km-btn" onclick="appendKM(\'lprev70-' + id + '\',\'M\',null)">M</button>',
-          '</div>',
-        '</div>',
-        '<div>',
-          '<div style="font-size:10px;color:#555;margin-bottom:3px;">当月ダイヤ数</div>',
-          '<div class="km-wrap">',
-            '<input type="text" placeholder="例: 500K" id="lcurr70-' + id + '" style="padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-            '<button class="km-btn" onclick="appendKM(\'lcurr70-' + id + '\',\'K\',null)">K</button>',
-            '<button class="km-btn" onclick="appendKM(\'lcurr70-' + id + '\',\'M\',null)">M</button>',
-          '</div>',
-        '</div>',
-      '</div>',
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">',
-        '<div>',
-          '<div style="font-size:10px;color:#555;margin-bottom:3px;">有効ライブ日数</div>',
-          '<input type="number" placeholder="例: 7" id="lrdays70-' + id + '" min="0" max="31" style="width:100%;padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-        '</div>',
-        '<div>',
-          '<div style="font-size:10px;color:#555;margin-bottom:3px;">配信時間（h）</div>',
-          '<input type="number" placeholder="例: 15" id="lrhours70-' + id + '" min="0" style="width:100%;padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #aac8f0;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-        '</div>',
-      '</div>',
-    '</div>',
-    '<div style="background:#f8f7f4;border-radius:8px;padding:8px 10px;">',
-      '<div style="font-size:10px;font-weight:600;color:#888;margin-bottom:6px;">アクティブタスク（70%）</div>',
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:7px;">',
-        '<div>',
-          '<div style="font-size:10px;color:#888;margin-bottom:3px;">配信日数（日）</div>',
-          '<input type="number" placeholder="例: 20" id="ldays70-' + id + '" min="0" max="31" style="width:100%;padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-        '</div>',
-        '<div>',
-          '<div style="font-size:10px;color:#888;margin-bottom:3px;">配信時間（h）</div>',
-          '<input type="number" placeholder="例: 80" id="lhours70-' + id + '" min="0" style="width:100%;padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-        '</div>',
-      '</div>',
-      '<div>',
-        '<div style="font-size:10px;color:#888;margin-bottom:3px;">当月ダイヤ数（アクティブ用）</div>',
-        '<div class="km-wrap">',
-          '<input type="text" placeholder="例: 1.2M" id="ldiamond70-' + id + '" style="padding:7px 8px;font-size:13px;font-weight:600;border:0.5px solid #ccc;border-radius:8px;background:#fff;outline:none;text-align:center;">',
-          '<button class="km-btn" onclick="appendKM(\'ldiamond70-' + id + '\',\'K\',null)">K</button>',
-          '<button class="km-btn" onclick="appendKM(\'ldiamond70-' + id + '\',\'M\',null)">M</button>',
-        '</div>',
-      '</div>',
-    '</div>'
-  ].join('');
-  document.getElementById('liver-rows-70').appendChild(div);
-}
-function removeLiverRow70(id) {
-  var el = document.getElementById('liver-row-70-' + id);
-  if (el) el.remove();
-}
-
-function calcAll70() {
-  var rows = document.getElementById('liver-rows-70').querySelectorAll('[id^="liver-row-70-"]');
-  var results = [];
-  rows.forEach(function(row) {
-    var rowId    = row.id.replace('liver-row-70-', '');
-    var name     = (document.getElementById('lname70-'    + rowId).value || '').trim() || 'ライバー' + rowId;
-    var tikId    = (document.getElementById('lid70-'      + rowId).value || '').trim();
-    var prev     = parseD(document.getElementById('lprev70-'   + rowId).value);
-    var lcurr    = parseD(document.getElementById('lcurr70-'   + rowId).value);
-    var rdays    = parseFloat(document.getElementById('lrdays70-'  + rowId).value) || 0;
-    var rhours   = parseFloat(document.getElementById('lrhours70-' + rowId).value) || 0;
-    var diamonds = parseD(document.getElementById('ldiamond70-' + rowId).value);
-    var days     = parseFloat(document.getElementById('ldays70-'   + rowId).value) || 0;
-    var hours    = parseFloat(document.getElementById('lhours70-'  + rowId).value) || 0;
-    if ((diamonds && diamonds > 0) || (lcurr && lcurr > 0)) {
-      results.push({ name:name, tikId:tikId, diamonds:diamonds, days:days, hours:hours,
-                     prev:prev, lcurr:lcurr, rdays:rdays, rhours:rhours });
-    }
-  });
-
-  var res70 = document.getElementById('multi-result-70');
-  if (results.length === 0) { res70.style.display = 'none'; return; }
-  res70.style.display = 'block';
-
-  var grandActive70 = 0;
-
-  var cardsHtml = results.map(function(r) {
-    // ランクアップ（70%）
-    var prevRk70  = getDiamondRank(r.prev   || 0);
-    var currRk70  = getDiamondRank(r.lcurr  || 0);
-    var isAdv70   = (r.rdays >= 7 && r.rhours >= 15);
-    var rkB70     = getRankupBonus(prevRk70, currRk70, isAdv70, r.lcurr);
-    var trkRate70 = rkB70.maintRate + (rkB70.isRankup ? rkB70.upRate : 0);
-    var rkJpy70   = (r.lcurr && !rkB70.belowThreshold) ? Math.round(r.lcurr * trkRate70 * FX * 0.7) : 0;
-
-    // アクティブ（70%）
-    var actLv70   = getActiveLv(r.days, r.hours, r.diamonds || 0);
-    var actJpy70  = (actLv70 > 0 && r.diamonds) ? Math.round(r.diamonds * lvData[actLv70].rateNum * FX * 0.7) : 0; // 70%適用済み
-
-    grandActive70 += rkJpy70 + actJpy70;
-
-    var bgRkP70 = rankColors[prevRk70-1], tcRkP70 = rankTColors[prevRk70-1];
-    var bgRkC70 = rankColors[currRk70-1], tcRkC70 = rankTColors[currRk70-1];
-
-    return '<div style="background:#fff;border:0.5px solid #aac8f0;border-radius:10px;padding:0.75rem;margin-bottom:0.5rem;">' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
-        '<div><span style="font-size:13px;font-weight:600;">' + r.name + '</span>' +
-          (r.tikId ? '<span style="font-size:10px;color:#185FA5;margin-left:6px;">' + r.tikId + '</span>' : '') + '</div>' +
-      '</div>' +
-      // ランクアップ
-      (r.prev || r.lcurr ? '<div style="background:#f0f5fb;border-radius:8px;padding:7px 10px;margin-bottom:6px;">' +
-        '<div style="font-size:10px;font-weight:600;color:#185FA5;margin-bottom:4px;">▸ ランクアップ（70%）</div>' +
-        '<div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;flex-wrap:wrap;">' +
-          '<div style="background:'+bgRkP70+';color:'+tcRkP70+';padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;">R'+prevRk70+' (前月)</div>' +
-          (rkB70.isRankup ? '<div style="font-size:11px;color:#185FA5;font-weight:700;">→ R'+currRk70+' ▲</div>' : '<div style="font-size:11px;color:#888;">= 維持</div>') +
-          '<div style="background:'+bgRkC70+';color:'+tcRkC70+';padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;">R'+currRk70+'</div>' +
-          '<div style="margin-left:auto;font-size:10px;background:'+(isAdv70?'#E6F1FB':'#f0ede8')+';color:'+(isAdv70?'#185FA5':'#aaa')+';padding:1px 6px;border-radius:999px;">'+(isAdv70?'⭐ 上級':'ベース')+'</div>' +
-        '</div>' +
-        (rkB70.belowThreshold
-          ? '<div style="font-size:11px;color:#993C1D;">⚠ 基準ダイヤ未達 — 0%</div>'
-          : '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-              '<span style="font-size:11px;color:#555;">維持 '+rkB70.maintPct+'%'+(rkB70.isRankup?' + アップ '+rkB70.upPct+'%':'')+'</span>' +
-              '<span style="font-size:15px;font-weight:700;color:#185FA5;">¥'+rkJpy70.toLocaleString()+'</span>' +
-            '</div>') +
-      '</div>' : '') +
-      // アクティブ
-      (r.diamonds ? '<div style="background:#f8f7f4;border-radius:8px;padding:7px 10px;">' +
-        '<div style="font-size:10px;font-weight:600;color:#888;margin-bottom:4px;">▸ アクティブ（70%） Lv' + (actLv70||'—') + '</div>' +
-        '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-          '<span style="font-size:11px;color:#888;">' + fmtD(r.diamonds) + ' ダイヤ</span>' +
-          '<span style="font-size:15px;font-weight:700;color:#185FA5;">¥'+actJpy70.toLocaleString()+'</span>' +
-        '</div>' +
-      '</div>' : '') +
-      '<div style="border-top:0.5px solid #aac8f0;margin-top:7px;padding-top:6px;display:flex;justify-content:space-between;align-items:baseline;">' +
-        '<span style="font-size:11px;color:#185FA5;">小計（70%）</span>' +
-        '<span style="font-size:16px;font-weight:700;color:#185FA5;">¥'+(rkJpy70+actJpy70).toLocaleString()+'</span>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-
-  document.getElementById('multi-cards-70').innerHTML = cardsHtml;
-  var taEl70 = document.getElementById('total-active-70');
-  taEl70.textContent = '¥' + grandActive70.toLocaleString();
-  taEl70.dataset.val = grandActive70;
-  updateGrandTotal70();
-}
-
-function clearAll70() {
-  document.getElementById('liver-rows-70').innerHTML = '';
-  liverCount70 = 0;
-  document.getElementById('multi-result-70').style.display = 'none';
-  var d = document.getElementById('rev-bonus-diamond-70');
-  if (d) d.value = '';
-  document.getElementById('rev-bonus-result-70').style.display = 'none';
-  addLiverRow70();
-  addLiverRow70();
-}
-
-function updateGrandTotal70() {
-  var activeJpy70  = parseInt((document.getElementById('total-active-70').dataset.val) || 0);
-  var revEl70      = document.getElementById('rev-bonus-jpy-70');
-  var revJpy70     = revEl70 ? parseInt((revEl70.textContent || '0').replace(/[¥,]/g,'')) || 0 : 0;
-  var grand70      = activeJpy70 + revJpy70;
-  document.getElementById('total-revenue-70').textContent = revJpy70 > 0 ? '¥' + revJpy70.toLocaleString() : '—';
-  document.getElementById('total-jpy-70').textContent     = grand70 > 0 ? '¥' + grand70.toLocaleString() : '—';
-}
-
-// 初期行（70%）
-addLiverRow70();
-addLiverRow70();
 
 </script>
 </body>
